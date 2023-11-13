@@ -5,9 +5,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 
-public class PetStoreTesting {
-
+public class PetStoreTest {
     @Test
+    void testPetLifecycle(){
+        postPet();
+        getPet();
+        updatePet();
+        deletePet();
+    }
+
      void postPet(){
         RestAssured.given()
                 .baseUri("https://petstore.swagger.io/v2/pet")
@@ -38,12 +44,10 @@ public class PetStoreTesting {
                 .body("id", equalTo(22953))
                 .body("name", equalTo("Al"))
                 .body("status", equalTo("available"));
+                System.out.println("Pet has been created");
     }
 
-
-    @Test
     void getPet() {
-        postPet();
                RestAssured.given()
                 .baseUri("https://petstore.swagger.io/v2/pet/22953")
                 .when().get()
@@ -54,15 +58,11 @@ public class PetStoreTesting {
                 .body("status", equalTo("available"));
 
         System.out.println("Pet is found");
-        System.out.println("Pet id is " + 22953);
-        System.out.println("Pet name is " + "Al");
-        System.out.println("Pet status is " + "available");
+
 
     }
 
-    @Test
     void updatePet() {
-        getPet();
         RestAssured.given()
                 .baseUri("https://petstore.swagger.io/v2/pet")
                 .header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -96,9 +96,7 @@ public class PetStoreTesting {
         System.out.println("Pet is updated");
     }
 
-    @Test
     void deletePet() {
-        updatePet();
         RestAssured.given()
                 .baseUri("https://petstore.swagger.io/v2/pet/22953")
                 .when().delete()
