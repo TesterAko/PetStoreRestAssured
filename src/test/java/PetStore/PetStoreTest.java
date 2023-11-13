@@ -1,3 +1,5 @@
+package PetStore;
+
 import io.restassured.RestAssured;
 import org.apache.http.HttpHeaders;
 import org.junit.jupiter.api.Test;
@@ -7,14 +9,14 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class PetStoreTest {
     @Test
-    void testPetLifecycle(){
+    void testPetLifecycle() {
         postPet();
         getPet();
         updatePet();
         deletePet();
     }
 
-     void postPet(){
+    void postPet() {
         RestAssured.given()
                 .baseUri("https://petstore.swagger.io/v2/pet")
                 .header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -44,11 +46,11 @@ public class PetStoreTest {
                 .body("id", equalTo(22953))
                 .body("name", equalTo("Al"))
                 .body("status", equalTo("available"));
-                System.out.println("Pet has been created");
+        System.out.println("Pet has been created");
     }
 
     void getPet() {
-               RestAssured.given()
+        RestAssured.given()
                 .baseUri("https://petstore.swagger.io/v2/pet/22953")
                 .when().get()
                 .then()
@@ -56,10 +58,7 @@ public class PetStoreTest {
                 .body("id", equalTo(22953))
                 .body("name", equalTo("Al"))
                 .body("status", equalTo("available"));
-
-        System.out.println("Pet is found");
-
-
+        System.out.println("Pet was found");
     }
 
     void updatePet() {
@@ -92,8 +91,7 @@ public class PetStoreTest {
                 .body("id", equalTo(22953))
                 .body("name", equalTo("Al"))
                 .body("status", equalTo("sold"));
-
-        System.out.println("Pet is updated");
+        System.out.println("Pet got updated");
     }
 
     void deletePet() {
@@ -103,7 +101,7 @@ public class PetStoreTest {
                 .then()
                 .statusCode(200)
                 .body("id", equalTo(null));
-        System.out.println("Pet is deleted");
+        System.out.println("Pet has been deleted");
     }
 }
 
