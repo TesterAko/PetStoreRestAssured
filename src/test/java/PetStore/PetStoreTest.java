@@ -1,21 +1,57 @@
 package PetStore;
 
 import io.restassured.RestAssured;
-import org.apache.http.HttpHeaders;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-import static org.hamcrest.Matchers.equalTo;
-
 public class PetStoreTest {
+    private static final String BASE_URI = "https://petstore.swagger.io/v2/pet";
+
+    @BeforeEach
+    void setup() {
+        RestAssured.baseURI = BASE_URI;
+    }
+    /*
     @Test
-    void testPetLifecycle() {
-        postPet();
-        getPet();
-        updatePet();
-        deletePet();
+    void testPetLifecyclePositive() {
+        Pet.postPet(12345, "Al", "available");
+        Pet.getPet(12345);
+        Pet.updatePet(12345, "Al", "sold");
+        Pet.deletePet(12345);
+    }
+*/
+
+
+    @Test
+    void testPetLifecycleNegative() {
+
+        Pet.postPet(5678, "Non", "Existent")
+                .then()
+                .statusCode(404);
+
+        Pet.getPet(5678)
+                .then()
+                .statusCode(404);
+
+        Pet.updatePet(5678, "Non", "Existent")
+                .then()
+                .statusCode(404);
+
+        Pet.deletePet(5678)
+                .then()
+                .statusCode(404);
     }
 
+
+}
+
+
+
+
+
+
+/*
     void postPet() {
         RestAssured.given()
                 .baseUri("https://petstore.swagger.io/v2/pet")
@@ -103,6 +139,6 @@ public class PetStoreTest {
                 .body("id", equalTo(null));
         System.out.println("Pet has been deleted");
     }
-}
+}*/
 
 
