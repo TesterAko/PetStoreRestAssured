@@ -4,6 +4,8 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.Matchers.equalTo;
+
 
 public class PetStoreTest {
     private static final String BASE_URI = "https://petstore.swagger.io/v2/pet";
@@ -12,37 +14,37 @@ public class PetStoreTest {
     void setup() {
         RestAssured.baseURI = BASE_URI;
     }
-    /*
+
+
     @Test
     void testPetLifecyclePositive() {
-        Pet.postPet(12345, "Al", "available");
-        Pet.getPet(12345);
+
+        Pet pet = new Pet(12345, "Al", "available");
+
+        Pet.postPet();
+        Pet.getPet();
         Pet.updatePet(12345, "Al", "sold");
-        Pet.deletePet(12345);
+        Pet.deletePet();
     }
-*/
 
 
+/*
     @Test
     void testPetLifecycleNegative() {
 
-        Pet.postPet(5678, "Non", "Existent")
-                .then()
-                .statusCode(404);
+        Pet pet = new Pet(5678, "Non", "Existent");
 
-        Pet.getPet(5678)
-                .then()
-                .statusCode(404);
+        Pet.postPet();
 
-        Pet.updatePet(5678, "Non", "Existent")
-                .then()
-                .statusCode(404);
+        Pet.getPet(5678);
 
-        Pet.deletePet(5678)
-                .then()
-                .statusCode(404);
+        Pet.updatePet(5678, "Non", "Existent");
+
+
+        Pet.deletePet(5678);
+
     }
-
+*/
 
 }
 

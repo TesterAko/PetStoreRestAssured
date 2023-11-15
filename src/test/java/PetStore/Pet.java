@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class Pet {
 
     private static final String CONTENT_TYPE_JSON = "application/json";
-    private int id;
+    private static int id;
     private static String name;
     private static String status;
 
@@ -20,7 +20,7 @@ public class Pet {
         this.name = name;
         this.status = status;
     }
-    static void postPet(int id, String name, String status) {
+    static void postPet() {
         RestAssured.given()
                 .header(HttpHeaders.CONTENT_TYPE, CONTENT_TYPE_JSON)
                 .body(getPetRequestBody(id, name, status))
@@ -28,21 +28,20 @@ public class Pet {
                 .then()
                 .statusCode(200)
                 .body("id", equalTo(id))
-                .body("name", equalTo("Al"))
-                .body("status", equalTo("available"));
+                .body("name", equalTo(name))
+                .body("status", equalTo(status));
         System.out.println("Pet has been created");
     }
 
-    static void getPet(int id) {
+     static void getPet() {
         RestAssured.given()
-
                 .body(getPetRequestBody(id, name, status))
                 .when().get("/{id}", id)
                 .then()
                 .statusCode(200)
                 .body("id", equalTo(id))
-                .body("name", equalTo("Al"))
-                .body("status", equalTo("available"));
+                .body("name", equalTo(name))
+                .body("status", equalTo(status));
         System.out.println("Pet was found");
     }
 
@@ -54,12 +53,12 @@ public class Pet {
                 .then()
                 .statusCode(200)
                 .body("id", equalTo(id))
-                .body("name", equalTo("Al"))
-                .body("status", equalTo("sold"));
+                .body("name", equalTo(name))
+                .body("status", equalTo(status));
         System.out.println("Pet got updated");
     }
 
-    static void deletePet(int id) {
+    static void deletePet() {
         RestAssured.given()
                 .when().delete("/{id}", id)
                 .then()
