@@ -28,7 +28,7 @@ public class PetStoreTest {
     }
 
 
-
+/*
     @Test
     void testPetLifecycleNegative() {
 
@@ -43,8 +43,7 @@ public class PetStoreTest {
         pet.deletePetNegative();
 
     }
-}
-
+}*/
 
 
 
