@@ -1,5 +1,5 @@
 package PetStore;
-/*
+
 import io.restassured.RestAssured;
 import org.apache.http.HttpHeaders;
 
@@ -127,4 +127,3 @@ public class Pet {
         System.out.println("Pet could not be deleted");
     }
 }
-*/
