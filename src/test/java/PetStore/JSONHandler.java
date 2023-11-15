@@ -1,6 +1,6 @@
 package PetStore;
 
-
+/*
 public class JSONHandler {
 
     static String getPetRequestBody(int id, String name, String status) {
@@ -27,3 +27,4 @@ public class JSONHandler {
                 """, id, name, status);
     }
 }
+*/
