@@ -4,7 +4,7 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.equalTo;
+
 
 
 public class PetStoreTest {
@@ -19,33 +19,30 @@ public class PetStoreTest {
     @Test
     void testPetLifecyclePositive() {
 
-        Pet pet = new Pet(12345, "Al", "available");
-
-        Pet.postPet();
-        Pet.getPet();
-        Pet.updatePet(12345, "Al", "sold");
-        Pet.deletePet();
+        Pet pet = new Pet(12345, "Loco", "available");
+        System.out.println("Positive Test");
+        pet.postPet();
+        pet.getPet();
+        pet.updatePet(12345, "Loco", "sold");
+        pet.deletePet();
     }
 
 
-/*
+
     @Test
     void testPetLifecycleNegative() {
 
-        Pet pet = new Pet(5678, "Non", "Existent");
+        Pet pet = new Pet(0000, "Non", "Existent");
+        System.out.println("\nNegative Test");
+        pet.postPetNegative();
 
-        Pet.postPet();
+        pet.getPetNegative();
 
-        Pet.getPet(5678);
+        pet.updatePetNegative(0000, "Dog", "sold");
 
-        Pet.updatePet(5678, "Non", "Existent");
-
-
-        Pet.deletePet(5678);
+        pet.deletePetNegative();
 
     }
-*/
-
 }
 
 
