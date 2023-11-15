@@ -73,7 +73,7 @@ public class Pet {
         System.out.println("Pet could not be found");
     }
 
-    /*static void updatePet(int id, String name, String status) {
+    static void updatePet(int id, String name, String status) {
         RestAssured.given()
                 .header(HttpHeaders.CONTENT_TYPE, CONTENT_TYPE_JSON)
                 .body(getPetRequestBody(id, name, status))
@@ -84,7 +84,7 @@ public class Pet {
                 .body("name", equalTo(name))
                 .body("status", equalTo(status));
         System.out.println("Pet got updated");
-    }*/
+    }
 
     static void updatePetNegative(int id, String name, String status) {
         if (!isPetPresent(id)) {
