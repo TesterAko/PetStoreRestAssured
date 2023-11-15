@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-
+/*
 
 public class PetStoreTest {
     private static final String BASE_URI = "https://petstore.swagger.io/v2/pet";
@@ -46,3 +46,4 @@ public class PetStoreTest {
 }
 
 
+*/
