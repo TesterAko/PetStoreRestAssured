@@ -2,9 +2,7 @@ package PetStore;
 
 import io.restassured.RestAssured;
 import org.apache.http.HttpHeaders;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.testng.annotations.BeforeMethod;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
