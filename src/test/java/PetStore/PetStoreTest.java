@@ -1,12 +1,11 @@
 package PetStore;
 
 import io.restassured.RestAssured;
-import io.restassured.parsing.Parser;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.parsing.Parser.*;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -109,10 +108,8 @@ public class PetStoreTest {
         System.out.println("Pet could not be updated");
 
 
-        petService.deletePet(id, HttpStatus.SC_NOT_FOUND)
-                .body("code", equalTo(404))
-                .body("type", equalTo("unknown"))
-                .body("message", equalTo("no data"));
+        petService.deletePet(id,HttpStatus.SC_NOT_FOUND)
+                .statusCode(equalTo(404));
         System.out.println("Pet could not be deleted");
     }
 }

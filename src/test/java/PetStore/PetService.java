@@ -32,7 +32,7 @@ public class PetService {
                 .statusCode(expectedStatus);
     }
 
-    public ValidatableResponse deletePet(Integer id, int expectedStatus) {
+    public ValidatableResponse deletePet(int id, int expectedStatus) {
         RestAssured.defaultParser = Parser.JSON;
         return spec()
                 .when().delete("/{id}", id)
