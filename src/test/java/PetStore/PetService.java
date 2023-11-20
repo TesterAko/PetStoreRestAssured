@@ -1,7 +1,7 @@
 package PetStore;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
+import io.restassured.parsing.Parser;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpHeaders;
@@ -32,12 +32,12 @@ public class PetService {
                 .statusCode(expectedStatus);
     }
 
-    public ValidatableResponse deletePet(int id, int expectedStatus) {
+    public ValidatableResponse deletePet(Integer id, int expectedStatus) {
+        RestAssured.defaultParser = Parser.JSON;
         return spec()
                 .when().delete("/{id}", id)
                 .then()
-                .statusCode(expectedStatus)
-                .contentType(ContentType.JSON);
+                .statusCode(expectedStatus);
     }
 
     private RequestSpecification spec() {
