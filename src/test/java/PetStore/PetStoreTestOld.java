@@ -7,12 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class PetStoreTestOld {
-
-
-    /*@Before
-    public void setup() {
-        RestAssured.baseURI = "https://petstore.swagger.io/v2/pet";
-    }*/
+/*
 
     @Test
     public void testPetStoreCreate() {
@@ -40,14 +35,14 @@ public class PetStoreTestOld {
                         }
                         """)
                 .when()
-                .get()
+                .post()
                 .then()
                 .statusCode(200)
                 .body("id", equalTo(12345))
                 .body("name", equalTo("Al"))
                 .body("status", equalTo("available"));
     }
-    /*
+
       @Test
     void createPet(){
         RestAssured.given()

@@ -12,8 +12,4 @@ public class BaseTest {
                 .baseUri(BASE_URI)
                 .header(HttpHeaders.CONTENT_TYPE, "application/json");
     }
-
-    public static int sum(int a, int b){
-        return a + b;
-    }
 }
