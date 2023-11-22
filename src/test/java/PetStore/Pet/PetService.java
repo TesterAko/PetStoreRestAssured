@@ -1,4 +1,4 @@
-package PetStore;
+package PetStore.Pet;
 
 import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
@@ -33,7 +33,6 @@ public class PetService {
     }
 
     public ValidatableResponse deletePet(int id, int expectedStatus) {
-        RestAssured.defaultParser = Parser.JSON;
         return spec()
                 .when().delete("/{id}", id)
                 .then()

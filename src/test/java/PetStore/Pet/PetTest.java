@@ -1,4 +1,4 @@
-package PetStore;
+package PetStore.Pet;
 
 import io.restassured.RestAssured;
 import org.apache.http.HttpStatus;
@@ -9,12 +9,12 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
-public class PetStoreTest {
+public class PetTest {
     private static final String BASE_URI = "https://petstore.swagger.io/v2/pet";
 
     private final PetService petService;
 
-    public PetStoreTest() {
+    public PetTest() {
         this.petService = new PetService();
     }
 

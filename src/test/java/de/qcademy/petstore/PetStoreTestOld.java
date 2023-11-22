@@ -1,4 +1,4 @@
-package PetStore;
+package de.qcademy.petstore;
 
 import io.restassured.RestAssured;
 import org.apache.http.HttpHeaders;
