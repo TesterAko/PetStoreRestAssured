@@ -44,14 +44,14 @@ public class StoreTest {
                         .body("id", equalTo(id))
                         .body("petId", equalTo(petId))
                         .body("quantity", equalTo(quantity));
-        System.out.println("The order has been placed: "+ body);
+        System.out.println("The order has been placed: \n"+ body);
         //Problem gelöst, "placed" wurde zweimal deklariert von mir und vom System, deswegen Fehler 400
 
         storeService.getOrder(id, HttpStatus.SC_OK)
                         .body("id", equalTo(id))
                         .body("petId", equalTo(petId))
                         .body("quantity", equalTo(quantity));
-        System.out.println("Order Information: "+ body);
+        System.out.println("Order Information: \n"+ body);
 
 
         storeService.deleteOrder(id, HttpStatus.SC_OK)
@@ -62,23 +62,20 @@ public class StoreTest {
 
     @Test
     void testOrderLifecycleNegative() {
-        System.out.println("Negative Tests");
-        storeService.postOrder(body, HttpStatus.SC_OK)
-                .body("id", equalTo(id))
-                .body("petId", equalTo(petId))
-                .body("quantity", equalTo(quantity));
-        System.out.println("The order has been placed: "+ body);
+        System.out.println("\nNegative Tests");
+        storeService.postOrder("", HttpStatus.SC_BAD_REQUEST)
+                        .body("code", equalTo(1))
+                        .body("type", equalTo("error"))
+                        .body("message", equalTo("No data"));
+        System.out.println("The order could not be placed");
 
-        storeService.getOrder(id, HttpStatus.SC_OK)
-                .body("id", equalTo(id))
-                .body("petId", equalTo(petId))
-                .body("quantity", equalTo(quantity));
-        System.out.println("Order Information: "+ body);
+        storeService.getOrder(1, HttpStatus.SC_NOT_FOUND)
+                .body("id", equalTo(null));
+        System.out.println("The order could not be found");
 
-
-        storeService.deleteOrder(id, HttpStatus.SC_OK)
-                .body("code", equalTo(200))
-                .body("message", equalTo(String.valueOf(id)));
-        System.out.println("The order: " + id + " has been deleted.");
+        storeService.deleteOrder(id, HttpStatus.SC_NOT_FOUND)
+                .body("code", equalTo(404))
+                .body("message", equalTo("Order Not Found"));
+        System.out.println("The order could not be deleted");
     }
 }
