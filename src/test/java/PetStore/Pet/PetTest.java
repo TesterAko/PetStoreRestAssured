@@ -19,7 +19,7 @@ public class PetTest {
     }
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         RestAssured.baseURI = BASE_URI;
     }
 
