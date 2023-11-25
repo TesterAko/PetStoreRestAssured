@@ -38,14 +38,14 @@ public class UserService {
 
     }
 
-    public ValidatableResponse loginUser(String username, String password, int expectedStatus) {
+    public ValidatableResponse logInUser(String username, String password, int expectedStatus) {
         return spec()
-                .when().get()
+                .when().get("/{username}",username)
                 .then()
                 .statusCode(expectedStatus);
     }
 
-    public ValidatableResponse logoutUser(int expectedStatus) {
+    public ValidatableResponse logOutUser(int expectedStatus) {
         return spec()
                 .when().get()
                 .then()

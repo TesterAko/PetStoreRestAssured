@@ -78,7 +78,20 @@ public class UserTest {
                 .body("message", equalTo(String.valueOf(id)));
         System.out.println("User has been updated " + newBody);
 
+        String updatedUsername = username+"Muster2";
+
+        userService.deleteUser(updatedUsername, HttpStatus.SC_OK)
+                .body("code", equalTo(HttpStatus.SC_OK))
+                .body("message", equalTo(updatedUsername));
+        System.out.println("User has been deleted " + updatedUsername);
+
+        userService.logInUser(updatedUsername, password, HttpStatus.SC_OK)
+                .body("code", equalTo(HttpStatus.SC_OK));
+        System.out.println("User " + updatedUsername + "has been logged in");
+
 
     }
+
+
 }
 
