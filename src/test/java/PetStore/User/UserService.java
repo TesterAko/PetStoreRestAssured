@@ -17,21 +17,22 @@ public class UserService {
 
     public ValidatableResponse getUser(String username, int expectedStatus) {
         return spec()
-                .when().get()
+                .when().get("/{username}",username)
                 .then()
                 .statusCode(expectedStatus);
     }
 
-    public ValidatableResponse updateUser(String username, int expectedStatus) {
+    public ValidatableResponse updateUser(String username, String body, int expectedStatus) {
         return spec()
-                .when().put()
+                .body(body)
+                .when().put("/{username}",username)
                 .then()
                 .statusCode(expectedStatus);
     }
 
     public ValidatableResponse deleteUser(String username, int expectedStatus) {
         return spec()
-                .when().delete()
+                .when().delete("/{username}",username)
                 .then()
                 .statusCode(expectedStatus);
 

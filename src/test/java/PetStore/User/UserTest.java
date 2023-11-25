@@ -33,30 +33,52 @@ public class UserTest {
 
     String body = String.format("""
             {
-              "id": %s,
-              "username": %s,
-              "firstName": %s,
-              "lastName": %s,
-              "email": %s,
-              "password": %s,
-              "phone": "string",
-              "userStatus": 0
+            "id": %s,
+            "username": "%s",
+            "firstName": "%s",
+            "lastName": "%s",
+            "email": "%s",
+            "password": "%s",
+            "phone": "string",
+            "userStatus": 0
             }
             """, id, username, firstname, lastname, email, password);
 
+    String newBody = String.format("""
+            {
+            "id": %s,
+            "username": "%s",
+            "firstName": "%s",
+            "lastName": "%s",
+            "email": "%s",
+            "password": "%s"
+            }
+            """, id, username+"Muster2", firstname, lastname, email, password);
+
     @Test
-    void testUserLifecyclePositive(){
+    void testUserLifecyclePositive() {
         System.out.println("Positive Tests");
         userService.createUser(body, HttpStatus.SC_OK)
+                .body("code", equalTo(HttpStatus.SC_OK))
+                .body("message", equalTo(String.valueOf(id)));
+        System.out.println("User has been Created " + body);
+
+        userService.getUser(username, HttpStatus.SC_OK)
                 .body("id", equalTo(id))
                 .body("username", equalTo(username))
                 .body("firstName", equalTo(firstname))
                 .body("lastName", equalTo(lastname))
                 .body("email", equalTo(email))
                 .body("password", equalTo(password));
-       System.out.println("User has been Created " + body);
+        System.out.println("User has been retrieved " + body);
+
+
+        userService.updateUser(username, newBody, HttpStatus.SC_OK)
+                .body("code", equalTo(HttpStatus.SC_OK))
+                .body("message", equalTo(String.valueOf(id)));
+        System.out.println("User has been updated " + newBody);
+
+
     }
-
 }
-
 
