@@ -39,15 +39,17 @@ public class UserService {
     }
 
     public ValidatableResponse logInUser(String username, String password, int expectedStatus) {
+        String logInUri=  "/login?username=" + username + "&password=" + password;
         return spec()
-                .when().get("/{username}",username)
+                .when().get(logInUri)
                 .then()
                 .statusCode(expectedStatus);
     }
 
     public ValidatableResponse logOutUser(int expectedStatus) {
+        String logOutUri= "/logout";
         return spec()
-                .when().get()
+                .when().get(logOutUri)
                 .then()
                 .statusCode(expectedStatus);
     }

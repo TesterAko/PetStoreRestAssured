@@ -80,18 +80,20 @@ public class UserTest {
 
         String updatedUsername = username+"Muster2";
 
+        userService.logInUser(updatedUsername, password, HttpStatus.SC_OK)
+                .body("code", equalTo(HttpStatus.SC_OK));
+        System.out.println("\nUser " + updatedUsername + " has been logged in");
+
+        userService.logOutUser(HttpStatus.SC_OK)
+                .body("code", equalTo(HttpStatus.SC_OK))
+                .body("message", equalTo("ok"));
+        System.out.println("\nUser " + updatedUsername + " has been logged out");
+
         userService.deleteUser(updatedUsername, HttpStatus.SC_OK)
                 .body("code", equalTo(HttpStatus.SC_OK))
                 .body("message", equalTo(updatedUsername));
-        System.out.println("User has been deleted " + updatedUsername);
-
-        userService.logInUser(updatedUsername, password, HttpStatus.SC_OK)
-                .body("code", equalTo(HttpStatus.SC_OK));
-        System.out.println("User " + updatedUsername + "has been logged in");
-
+        System.out.println("\nUser has been deleted " + updatedUsername);
 
     }
-
-
 }
 
