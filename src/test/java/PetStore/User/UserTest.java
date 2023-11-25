@@ -95,5 +95,27 @@ public class UserTest {
         System.out.println("\nUser has been deleted " + updatedUsername);
 
     }
+
+    @Test
+    void testUserLifecycleNegative() {
+        System.out.println("Negative Tests");
+        userService.createUser(username, HttpStatus.SC_BAD_REQUEST)
+                .body("code", equalTo(HttpStatus.SC_BAD_REQUEST))
+                .body("message", equalTo("bad input"));
+        System.out.println("User could not be created");
+
+        userService.getUser(username, HttpStatus.SC_NOT_FOUND)
+                .body("code", equalTo(1))
+                .body("message", equalTo("User not found"));
+        System.out.println("User could not be found");
+
+        userService.updateUser("", body, HttpStatus.SC_METHOD_NOT_ALLOWED)
+                .statusCode(HttpStatus.SC_METHOD_NOT_ALLOWED);
+        System.out.println("User could not be updated");
+
+        userService.logInUser(, , HttpStatus.SC_NOT_FOUND)
+                .body("code", equalTo(1))
+                .body("message", equalTo("User not found"));
+    }
 }
 
