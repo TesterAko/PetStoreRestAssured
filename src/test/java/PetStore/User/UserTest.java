@@ -53,7 +53,7 @@ public class UserTest {
             "email": "%s",
             "password": "%s"
             }
-            """, id, username+"Muster2", firstname, lastname, email, password);
+            """, id, username + "Muster2", firstname, lastname, email, password);
 
     @Test
     void testUserLifecyclePositive() {
@@ -78,7 +78,7 @@ public class UserTest {
                 .body("message", equalTo(String.valueOf(id)));
         System.out.println("User has been updated " + newBody);
 
-        String updatedUsername = username+"Muster2";
+        String updatedUsername = username + "Muster2";
 
         userService.logInUser(updatedUsername, password, HttpStatus.SC_OK)
                 .body("code", equalTo(HttpStatus.SC_OK));
@@ -110,12 +110,13 @@ public class UserTest {
         System.out.println("User could not be found");
 
         userService.updateUser("", body, HttpStatus.SC_METHOD_NOT_ALLOWED)
-                .statusCode(HttpStatus.SC_METHOD_NOT_ALLOWED);
+                .statusCode(equalTo(HttpStatus.SC_METHOD_NOT_ALLOWED));
         System.out.println("User could not be updated");
 
-        userService.logInUser(, , HttpStatus.SC_NOT_FOUND)
-                .body("code", equalTo(1))
-                .body("message", equalTo("User not found"));
+
+        userService.deleteUser("Test", HttpStatus.SC_NOT_FOUND)
+                .statusCode(equalTo(HttpStatus.SC_NOT_FOUND));
+        System.out.println("User could not be deleted");
     }
 }
 
